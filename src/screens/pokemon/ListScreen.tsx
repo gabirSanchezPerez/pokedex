@@ -5,18 +5,17 @@ import {PokedexContext} from '../../context/PokedexContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
 import { MD2Colors, Text } from 'react-native-paper';
-import CardPokemon from '../components/CardPokemon';
+import CardListPokemon from '../components/CardListPokemon';
 
 const ListScreen = () => {
   const { top } = useSafeAreaInsets();
   const {pokemons} = useContext(PokedexContext) as PokemonContextType;
-  console.log(pokemons);
+  //console.log(pagination);
   return (
     <View style={[style.container,{paddingTop: top+10}]}>
       <Image style={style.logo} source={require('../../assets/logo.png')}  />
-      <FlatList data={pokemons} keyExtractor={(pokemon: Pokemon) => `${pokemon.id}`} ListHeaderComponent={() => (
-        <Text style={style.title} variant="headlineMedium">Lista de Pokemon</Text>
-      )}  style={style.list} renderItem={({item}) => <CardPokemon pokemon={item}/>}/>
+      <Text style={style.title} variant="headlineMedium">Lista de Pokemon</Text>
+      <FlatList data={pokemons} keyExtractor={(pokemon: Pokemon) => `${pokemon.id}`} style={style.list} renderItem={({item}) => <CardListPokemon pokemon={item}/>}/>
      
     </View>
   );
@@ -31,6 +30,7 @@ export const style = StyleSheet.create({
   list: {
     paddingHorizontal: '2.5%',
     width: '100%',
+    marginBottom: 10,
   },
   title: {
     color: MD2Colors.blue700,
