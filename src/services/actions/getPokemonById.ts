@@ -1,6 +1,6 @@
 
-import { Pokemon, PokemonContextType } from '../../config/interfaces/pokemon';
-import { PokemonAPIResponse } from '../../config/interfaces/pokemonAPI';
+import { Pokemon } from '../../config/interfaces/pokemon';
+import { PokemonAPIResponse, Result } from '../../config/interfaces/pokemonAPI';
 import { pokeApi } from '../pokeApi';
 
 const getImages = (dataImages: any): string[] => {
@@ -30,23 +30,27 @@ const getImages = (dataImages: any): string[] => {
     return images;
 };
 
+const caracteristMapper = (caracterist: Result) => {
+    return {
+        name: caracterist.name,
+        url: caracterist.url,
+    }
+}
 const pokemonMapper = (data: any): Pokemon => {
-    
     return {
         id: data.id,
         name: data.name,
         url: "",
         avatar: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`,
-        types: data.types.map((type: any) => type.type.name),
+        types: data.types.map((type: any) => caracteristMapper(type.type)),
         images: getImages(data.sprites),
-        abilities: data.abilities.map((ability: any) => ability.ability.name),
+        abilities: data.abilities.map((ability: any) => caracteristMapper(ability.ability)),
     }
 }
 
 export const getPokemonById = async (
     id: number,
 ): Promise<Pokemon> => {
-    console.log("GET By Id", id)
     try {
         const url = `/pokemon/${id}`;
         const { data } = await pokeApi.get<PokemonAPIResponse>(url);

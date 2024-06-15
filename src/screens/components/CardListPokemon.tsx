@@ -18,7 +18,7 @@ const CardListPokemon = ({ pokemon }: Props) => {
   return (
     <Card style={{marginBottom: 10}}>
       <Card.Content>
-        <Text variant="titleLarge">{pokemon.id} {pokemon.name}</Text>
+        <Text variant="titleLarge">{pokemon.id} {pokemon.name.toUpperCase()}</Text>
         <Text variant="bodyMedium">Para saber más de este pokemón dar click en ner más.</Text>
       </Card.Content>
       {pokemon.avatar &&

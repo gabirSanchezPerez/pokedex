@@ -14,8 +14,7 @@ interface Props {
 
 const CardPokemon = ({ pokemon }: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
-  const { _setPokemon } = useContext(PokedexContext) as PokemonContextType;
-  console.log(pokemon.images)
+  const { obtenerCaracteristica } = useContext(PokedexContext) as PokemonContextType;
   return (
     <Card>
       <Text style={{ textAlign: "center", marginHorizontal: 10, marginTop: 10, padding: 15, backgroundColor: MD2Colors.yellow600, color: MD2Colors.blue700, fontWeight: "bold", textTransform: "uppercase" }} variant="headlineMedium">{pokemon.name}</Text>
@@ -28,14 +27,14 @@ const CardPokemon = ({ pokemon }: Props) => {
         <Text variant="labelLarge">Habilidades:</Text>
         <View style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10 }}>
         {pokemon.abilities?.map((ability, i) => (
-          <Chip key={i} mode="outlined" onPress={() => console.log('Pressed')} style={{marginLeft: 10}}>{ability}</Chip>
+          <Chip key={i} mode="outlined" onPress={() => obtenerCaracteristica(ability.url)} style={{marginLeft: 10}}>{ability.name}</Chip>
         ))}
         </View>
 
         <Text variant="labelLarge">Tipo:</Text>
         <View style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10 }}>
           {pokemon.types?.map((type, i) => (
-            <Chip key={i} mode="outlined" onPress={() => console.log('Pressed')} style={{marginLeft: 10}} >{type}</Chip>
+            <Chip key={i} mode="outlined" onPress={() => obtenerCaracteristica(type.url)} style={{marginLeft: 10}} >{type.name}</Chip>
           ))}
         </View>
 
@@ -47,8 +46,5 @@ const CardPokemon = ({ pokemon }: Props) => {
 
   )
 }
-/** <View>
-      <Image src={pokemon.avatar} style={{ objectFit: 'cover', width: 150, height: 150 }} />
-      <Text>{pokemon.name}??</Text>
-    </View>  */
+
 export default CardPokemon

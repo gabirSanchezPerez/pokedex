@@ -1,13 +1,13 @@
-import { PokemonAPIResponse } from "./pokemonAPI";
+import { PokemonAPIResponse, Result } from "./pokemonAPI";
 
 export interface Pokemon {
   id: number;
   name: string;
   url: string;
   avatar?: string;
-  types?: string[];
+  types?: Result[];
   images?: string[];
-  abilities?: string[];
+  abilities?: Result[];
 }
 
 export type PokemonContextType = {
@@ -17,4 +17,6 @@ export type PokemonContextType = {
   viewPokemon: (pokemonId: number) => void;
   pagination: PokemonAPIResponse | null;
   pokemon: Pokemon | null;
+  obtenerCaracteristica: (url: string) => void;
+  pokemonCaracterist: Pokemon[];
 };
