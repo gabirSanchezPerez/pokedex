@@ -7,7 +7,7 @@ import DetailScreen from '../screens/pokemon/DetailScreen';
 export type RootStackParams = {
   LoadingScreen: undefined;
   ListScreen: undefined;
-  DetailScreen: {pokemonID: number};
+  DetailScreen: {pokemonId: number};
 };
 
 const Stack = createStackNavigator<RootStackParams>();
