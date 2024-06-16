@@ -16,16 +16,13 @@ const CardListPokemon = ({ pokemon }: Props) => {
   }
 
   return (
-    <Card mode="elevated" style={{marginBottom: 10, borderColor: MD2Colors.blue700}}>
+    <Card style={{marginBottom: 10, borderColor: MD2Colors.blue900, borderWidth: 1}}>
       <Card.Content>
-        <Text variant="titleLarge">{pokemon.id} {pokemon.name.toUpperCase()}</Text>
-        <Text variant="bodyMedium">Para saber más de este pokemón dar click en Ver Pokemon.</Text>
+        <Text variant="titleLarge" selectionColor={MD2Colors.grey900}># {pokemon.id}: {pokemon.name}</Text>
+        
       </Card.Content>
-      {pokemon.avatar &&
-        <Card.Cover source={{ uri: pokemon.avatar }} />
-      }
-      <Card.Actions style={{padding: 15}}>
-        <ButtonPokemon title="Ver Pokemon" press={() => _viewPokemon(pokemon.id)} />
+      <Card.Actions>
+        <ButtonPokemon title="Ver" press={() => _viewPokemon(pokemon.id)} />
       </Card.Actions>
     </Card>
 

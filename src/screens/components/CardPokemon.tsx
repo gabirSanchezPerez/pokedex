@@ -17,8 +17,8 @@ const CardPokemon = ({ pokemon }: Props) => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
   const { obtenerCaracteristica } = useContext(PokedexContext) as PokemonContextType;
   return (
-    <Card>
-      <Text style={{ textAlign: "center", marginHorizontal: 10, marginTop: 10, padding: 15, backgroundColor: MD2Colors.yellow600, color: MD2Colors.blue700, fontWeight: "bold", textTransform: "uppercase" }} variant="headlineMedium">{pokemon.name}</Text>
+    <Card >
+      <Text style={{ textAlign: "center", marginHorizontal: 10, marginTop: 10, padding: 15, backgroundColor: MD2Colors.amberA200, color: MD2Colors.blue900, fontWeight: "bold", textTransform: "uppercase" }} variant="headlineMedium">{pokemon.name}</Text>
       <Image source={{ uri: pokemon.avatar }} style={{ objectFit: 'cover', width: 250, height: 250, alignSelf: "center" }} />
 
       <Card.Content>
@@ -44,7 +44,6 @@ const CardPokemon = ({ pokemon }: Props) => {
         <ButtonPokemon title="Regresar" press={() => navigation.goBack()} />
       </Card.Actions>
     </Card>
-
   )
 }
 

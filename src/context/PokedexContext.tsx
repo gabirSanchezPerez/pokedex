@@ -17,36 +17,37 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [pokemonCaracterist, setPokemonCaracterist] = useState<Pokemon[]>([]);
 
   const obtenerPokemons = async (page: number = 0) => {
-    console.log("obtenerPokemons")
     let data = await getPokemons(page);
     setPagination(data[0]);
     if (page === 0) {
       setPokemons(data[1]);
     } else {
       setPokemons(data[1]);
-      //setPokemons([...pokemons] ,data[1]);
     }
     
     navigation.reset({
-      routes: [{ name: 'ListScreen' ,params: {tipoList: 0}},],
+      routes: [{ name: 'ListScreen' ,params: {listCaracteristic: ''}},],
     });
   };
   const obtenerPokemonById = async (id: number) => {
-    console.log("obtenerPokemonById")
     let dataPokemon = await getPokemonById(id)
     setPokemon(dataPokemon)
   }
   const viewPokemon = (pokemonId: number) => {
-    console.log("viewPokemon")
     navigation.navigate('DetailScreen', { pokemonId });
   };
 
   const obtenerCaracteristica = async (url: string) => {
-    console.log("obtenerCaracteristica")
     let urlData = url.split("/");
     let caracterist = await getCaracteristic(urlData[5], parseInt(urlData[6]));
-    setPokemonCaracterist(caracterist);
-    navigation.navigate('ListScreen',{ tipoList: 1 });
+    setPokemonCaracterist(caracterist[1]);
+    let typeCatracterist = ""
+    if ( urlData[5] === "type") {
+      typeCatracterist = "Tipo:";
+    } else {
+      typeCatracterist= "Con Habilidad:";
+    }
+    navigation.navigate('ListScreen',{ listCaracteristic: `${typeCatracterist} ${caracterist[0]}` });
   }
   return (
     <PokedexContext.Provider value={{ pokemons, obtenerPokemons, viewPokemon, pagination, obtenerPokemonById, pokemon, obtenerCaracteristica, pokemonCaracterist }}>

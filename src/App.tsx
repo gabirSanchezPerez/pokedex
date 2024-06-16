@@ -2,16 +2,28 @@ import 'react-native-gesture-handler';
 
 import * as React from 'react';
 import { StackNavigator } from './navigation/StackNavigator';
-import { ThemeContextProvider } from './context/ThemeContext';
 import PokedexProvider from './context/PokedexContext';
+import { PaperProvider, MD3LightTheme as themaDefault  } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+
+const theme = {
+  ...themaDefault,
+  colors: {
+    ...themaDefault.colors,
+    primary: 'tomato',
+    secondary: 'yellow',
+  },
+};
 
 const App = () => {
   return (
-    <ThemeContextProvider>
-      <PokedexProvider>
-        <StackNavigator />
-      </PokedexProvider>
-    </ThemeContextProvider>
+    <PaperProvider theme={theme}>
+      <NavigationContainer>
+        <PokedexProvider>
+          <StackNavigator />
+        </PokedexProvider>
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 

@@ -6,7 +6,7 @@ import DetailScreen from '../screens/pokemon/DetailScreen';
 
 export type RootStackParams = {
   LoadingScreen: undefined;
-  ListScreen: { tipoList: number};
+  ListScreen: { listCaracteristic: string};
   DetailScreen: {pokemonId: number};
 };
 
@@ -23,7 +23,7 @@ export const StackNavigator = () => {
         },
       }}>
       <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
-      <Stack.Screen name="ListScreen" component={ListScreen} />
+      <Stack.Screen name="ListScreen" component={ListScreen} initialParams={{ listCaracteristic: "" }} />
       <Stack.Screen name="DetailScreen" component={DetailScreen} />
     </Stack.Navigator>
   );

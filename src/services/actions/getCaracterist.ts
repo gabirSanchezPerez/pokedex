@@ -14,14 +14,14 @@ const pokemonMapper = (data: any): Pokemon => {
 export const getCaracteristic = async (
     origen: string,
     id: number
-): Promise<Pokemon[]> => {
+): Promise<[string, Pokemon[]]> => {
     try {
         const url = `/${origen}/${id}`;
         const { data } = await pokeApi.get(url);
         
         const pokemons = data.pokemon.map( (pokemons: any) => pokemonMapper(pokemons.pokemon));
         
-        return pokemons;
+        return [data.name, pokemons];
     } catch (error) {
         throw new Error('Error en getCaracteristic');
     }
