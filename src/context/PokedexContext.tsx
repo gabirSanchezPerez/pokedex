@@ -16,13 +16,19 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
   const [pokemonCaracterist, setPokemonCaracterist] = useState<Pokemon[]>([]);
 
-  const obtenerPokemons = async () => {
+  const obtenerPokemons = async (page: number = 0) => {
     console.log("obtenerPokemons")
-    let data = await getPokemons(0);
+    let data = await getPokemons(page);
     setPagination(data[0]);
-    setPokemons(data[1]);
+    if (page === 0) {
+      setPokemons(data[1]);
+    } else {
+      setPokemons(data[1]);
+      //setPokemons([...pokemons] ,data[1]);
+    }
+    
     navigation.reset({
-      routes: [{ name: 'ListScreen' }],
+      routes: [{ name: 'ListScreen' ,params: {tipoList: 0}},],
     });
   };
   const obtenerPokemonById = async (id: number) => {
@@ -40,7 +46,7 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     let urlData = url.split("/");
     let caracterist = await getCaracteristic(urlData[5], parseInt(urlData[6]));
     setPokemonCaracterist(caracterist);
-    navigation.navigate('ListScreen');
+    navigation.navigate('ListScreen',{ tipoList: 1 });
   }
   return (
     <PokedexContext.Provider value={{ pokemons, obtenerPokemons, viewPokemon, pagination, obtenerPokemonById, pokemon, obtenerCaracteristica, pokemonCaracterist }}>
