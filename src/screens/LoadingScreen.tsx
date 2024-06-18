@@ -1,24 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, MD2Colors, Text } from 'react-native-paper';
-import { PokedexContext } from '../context/PokedexContext';
-import { PokemonContextType } from '../config/interfaces/pokemon';
 
 const LoadingScreen = () => {
-  const { obtenerPokemons } = useContext(PokedexContext) as PokemonContextType;
-  useEffect(() => {
-    obtenerPokemons(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <View style={style.container}>
       <View style={style.body}>
-        <Image style={style.logo} source={require('../assets/logo.png')} />
+        <Image style={style.logo} source={require('../assets/logo.png')} testID="loading-logo" />
         <ActivityIndicator
           animating={true}
           color={MD2Colors.blue900}
           size={50}
+          testID="loading-indicator"
         />
         <Text style={style.title} variant="headlineSmall">Un momento por favor</Text>
       </View>

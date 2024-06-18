@@ -4,7 +4,7 @@ import { Pokemon, PokemonContextType } from '../../config/interfaces/pokemon';
 import { PokedexContext } from '../../context/PokedexContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
-import { Button, MD2Colors, Text } from 'react-native-paper';
+import { MD2Colors, Text } from 'react-native-paper';
 import CardListPokemon from '../components/CardListPokemon';
 import { NavigationProp, useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParams } from '../../navigation/StackNavigator';

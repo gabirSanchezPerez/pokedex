@@ -1,4 +1,4 @@
-import React, { useState, createContext, FC } from 'react';
+import React, { useState, createContext, FC, useEffect } from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Pokemon, PokemonContextType } from '../config/interfaces/pokemon';
 import { getPokemons } from '../services/actions/getPokemons';
@@ -46,6 +46,11 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     }
     navigation.navigate('ListScreen',{ listCaracteristic: `${typeCatracterist} ${caracterist[0]}` });
   }
+
+  useEffect(() => {
+    obtenerPokemons(0);
+  }, []);
+
   return (
     <PokedexContext.Provider value={{ pokemons, obtenerPokemons, pagination, obtenerPokemonById, pokemon, obtenerCaracteristica, pokemonCaracterist }}>
       {children}
