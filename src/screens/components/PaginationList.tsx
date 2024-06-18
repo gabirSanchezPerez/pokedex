@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { PokemonContextType } from '../../config/interfaces/pokemon';
 import { PokedexContext } from '../../context/PokedexContext';
@@ -47,7 +47,7 @@ const PaginationList = ({ listCaracteristic }: Props) => {
     }, [listCaracteristic]);
 
     return (
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, alignItems: "center", height: 60, width: '100%', backgroundColor: MD2Colors.amber100 }} >
+        <View style={style.container} >
             {pagination?.previous === null || listCaracteristic !== "" ? <ButtonPokemon title="<" type="secondary"  /> : <ButtonPokemon title="<" press={() => getMorePokemons('-')} type="primary" />}
 
             {loading ? (
@@ -60,5 +60,9 @@ const PaginationList = ({ listCaracteristic }: Props) => {
         </View>
     )
 }
+
+export const style = StyleSheet.create({
+    container: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, alignItems: "center", height: 60, width: '100%', backgroundColor: MD2Colors.amber100 }
+  });
 
 export default PaginationList

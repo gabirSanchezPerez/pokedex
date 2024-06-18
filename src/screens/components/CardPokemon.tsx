@@ -1,4 +1,4 @@
-import { Image, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React, { useContext } from 'react'
 import { Pokemon, PokemonContextType } from '../../config/interfaces/pokemon'
 import { Button, Card, Chip, MD2Colors, Text } from 'react-native-paper';
@@ -18,24 +18,24 @@ const CardPokemon = ({ pokemon }: Props) => {
   const { obtenerCaracteristica } = useContext(PokedexContext) as PokemonContextType;
   return (
     <Card >
-      <Text style={{ textAlign: "center", marginHorizontal: 10, marginTop: 10, padding: 15, backgroundColor: MD2Colors.amberA200, color: MD2Colors.blue900, fontWeight: "bold", textTransform: "uppercase" }} variant="headlineMedium">{pokemon.name}</Text>
+      <Text style={style.title} variant="headlineMedium">{pokemon.name}</Text>
       <Image source={{ uri: pokemon.avatar }} style={{ objectFit: 'cover', width: 250, height: 250, alignSelf: "center" }} />
 
       <Card.Content>
 
-        <FlatList horizontal showsHorizontalScrollIndicator={false} data={pokemon.images} keyExtractor={item => item} renderItem={({ item }) => (<Image source={{ uri: item }} style={{ resizeMode: "contain", width: 100, height: 100, alignSelf: "center" }} />)} />
+        <FlatList horizontal showsHorizontalScrollIndicator={false} data={pokemon.images} keyExtractor={item => item} renderItem={({ item }) => (<Image source={{ uri: item }} style={style.gallery} />)} />
 
         <Text variant="labelLarge">Habilidades:</Text>
-        <View style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10 }}>
+        <View style={style.bodyCarateristics}>
           {pokemon.abilities?.map((ability, i) => (
-            <Chip key={i} mode="outlined" onPress={() => obtenerCaracteristica(ability.url)} style={{ marginLeft: 10 }}>{ability.name}</Chip>
+            <Chip key={i} mode="outlined" onPress={() => obtenerCaracteristica(ability.url)} style={style.caracteristc}>{ability.name}</Chip>
           ))}
         </View>
 
         <Text variant="labelLarge">Tipo:</Text>
-        <View style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10 }}>
+        <View style={style.bodyCarateristics}>
           {pokemon.types?.map((type, i) => (
-            <Chip key={i} mode="outlined" onPress={() => obtenerCaracteristica(type.url)} style={{ marginLeft: 10 }} >{type.name}</Chip>
+            <Chip key={i} mode="outlined" onPress={() => obtenerCaracteristica(type.url)} style={style.caracteristc} >{type.name}</Chip>
           ))}
         </View>
 
@@ -47,4 +47,10 @@ const CardPokemon = ({ pokemon }: Props) => {
   )
 }
 
+export const style = StyleSheet.create({
+  bodyCarateristics:{ flexDirection: 'row', marginHorizontal: 10, marginTop: 10, flexWrap: "wrap" },
+  title: { textAlign: "center", marginHorizontal: 10, marginTop: 10, padding: 15, backgroundColor: MD2Colors.amberA200, color: MD2Colors.blue900, fontWeight: "bold", textTransform: "uppercase" },
+  caracteristc: { marginLeft: 5, marginTop: 5 },
+  gallery: { resizeMode: "contain", width: 100, height: 100, alignSelf: "center" }
+});
 export default CardPokemon

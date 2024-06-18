@@ -1,31 +1,27 @@
-import { Image, View } from 'react-native'
-import React, { useContext } from 'react'
-import { Pokemon, PokemonContextType } from '../../config/interfaces/pokemon'
+import React from 'react'
+import { Pokemon } from '../../config/interfaces/pokemon'
 import { Card, MD2Colors, Text } from 'react-native-paper'
-import { PokedexContext } from '../../context/PokedexContext';
 import ButtonPokemon from './ButtonPokemon';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParams } from '../../navigation/StackNavigator';
 
 interface Props {
   pokemon: Pokemon;
 }
 
 const CardListPokemon = ({ pokemon }: Props) => {
-  const { viewPokemon } =  useContext(PokedexContext) as PokemonContextType;
-  const _viewPokemon = (pokemonId: number) => {
-    viewPokemon(pokemonId);
-  }
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const viewPokemon = (pokemonId: number) => (navigation.navigate('DetailScreen', { pokemonId }));
 
   return (
     <Card style={{marginBottom: 10, borderColor: MD2Colors.blue900, borderWidth: 1}}>
       <Card.Content>
         <Text variant="titleLarge" selectionColor={MD2Colors.grey900}># {pokemon.id}: {pokemon.name}</Text>
-        
       </Card.Content>
       <Card.Actions>
-        <ButtonPokemon title="Ver" press={() => _viewPokemon(pokemon.id)} />
+        <ButtonPokemon title="Ver" press={() => viewPokemon(pokemon.id)} />
       </Card.Actions>
     </Card>
-
   )
 }
 

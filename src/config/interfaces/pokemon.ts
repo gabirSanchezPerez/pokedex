@@ -11,12 +11,11 @@ export interface Pokemon {
 }
 
 export type PokemonContextType = {
-  pokemons: Pokemon[];
   obtenerPokemons: (page: number) => void;
+  pokemons: Pokemon[];
   obtenerPokemonById: (id: number) => void;
-  viewPokemon: (pokemonId: number) => void;
-  pagination: PokemonAPIResponse | null;
   pokemon: Pokemon | null;
   obtenerCaracteristica: (url: string) => void;
   pokemonCaracterist: Pokemon[];
+  pagination: PokemonAPIResponse | null;
 };

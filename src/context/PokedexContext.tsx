@@ -33,9 +33,6 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     let dataPokemon = await getPokemonById(id)
     setPokemon(dataPokemon)
   }
-  const viewPokemon = (pokemonId: number) => {
-    navigation.navigate('DetailScreen', { pokemonId });
-  };
 
   const obtenerCaracteristica = async (url: string) => {
     let urlData = url.split("/");
@@ -50,7 +47,7 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     navigation.navigate('ListScreen',{ listCaracteristic: `${typeCatracterist} ${caracterist[0]}` });
   }
   return (
-    <PokedexContext.Provider value={{ pokemons, obtenerPokemons, viewPokemon, pagination, obtenerPokemonById, pokemon, obtenerCaracteristica, pokemonCaracterist }}>
+    <PokedexContext.Provider value={{ pokemons, obtenerPokemons, pagination, obtenerPokemonById, pokemon, obtenerCaracteristica, pokemonCaracterist }}>
       {children}
     </PokedexContext.Provider>
   );

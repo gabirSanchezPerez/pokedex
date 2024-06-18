@@ -17,7 +17,7 @@ const ButtonPokemon = ({ title, press, type = "primary" }: Props) => {
           textColor={MD2Colors.white}
           onPress={() => press()}
           mode="contained"
-          style={{ borderColor: MD2Colors.white, borderWidth: 1, marginBottom: 5 }}  >
+          style={style.myButton}  >
           {title}
         </Button >
       ) : (
@@ -25,7 +25,7 @@ const ButtonPokemon = ({ title, press, type = "primary" }: Props) => {
           buttonColor={type === "primary" ? MD2Colors.blue900 : MD2Colors.grey400}
           textColor={MD2Colors.white}
           mode="outlined"
-          style={{ borderColor: MD2Colors.white, borderWidth: 1, marginBottom: 5 }}  >
+          style={style.myButton}  >
           {title}
         </Button>
       )}</>
@@ -34,7 +34,7 @@ const ButtonPokemon = ({ title, press, type = "primary" }: Props) => {
 };
 
 export const style = StyleSheet.create({
-
+  myButton: { borderColor: MD2Colors.white, borderWidth: 1, marginBottom: 5 }
 });
 
 export default ButtonPokemon;
