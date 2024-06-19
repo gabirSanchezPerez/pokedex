@@ -17,17 +17,17 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [pokemonCaracterist, setPokemonCaracterist] = useState<Pokemon[]>([]);
 
   const obtenerPokemons = async (page: number = 0) => {
-    let data = await getPokemons(page);
-    setPagination(data[0]);
-    if (page === 0) {
-      setPokemons(data[1]);
-    } else {
-      setPokemons(data[1]);
-    }
-    
+    //try {
+    const [paginationData, pokemonsData] = await getPokemons(page);
+    setPagination(paginationData);
+    setPokemons(pokemonsData);
+
     navigation.reset({
-      routes: [{ name: 'ListScreen' ,params: {listCaracteristic: ''}},],
+      routes: [{ name: 'ListScreen', params: { listCaracteristic: '' } },],
     });
+    /*} catch (err) {
+      throw new Error(`Error al obtener los Pokemons ${err}`);
+    }*/
   };
   const obtenerPokemonById = async (id: number) => {
     let dataPokemon = await getPokemonById(id)
@@ -39,12 +39,12 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     let caracterist = await getCaracteristic(urlData[5], parseInt(urlData[6]));
     setPokemonCaracterist(caracterist[1]);
     let typeCatracterist = ""
-    if ( urlData[5] === "type") {
+    if (urlData[5] === "type") {
       typeCatracterist = "Tipo:";
     } else {
-      typeCatracterist= "Con Habilidad:";
+      typeCatracterist = "Con Habilidad:";
     }
-    navigation.navigate('ListScreen',{ listCaracteristic: `${typeCatracterist} ${caracterist[0]}` });
+    navigation.navigate('ListScreen', { listCaracteristic: `${typeCatracterist} ${caracterist[0]}` });
   }
 
   useEffect(() => {
