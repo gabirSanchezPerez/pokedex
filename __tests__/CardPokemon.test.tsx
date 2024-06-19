@@ -3,7 +3,6 @@ import {render, fireEvent} from '@testing-library/react-native';
 import CardPokemon from '../src/screens/components/CardPokemon';
 import {PokedexContext} from '../src/context/PokedexContext';
 import {PokemonContextType} from '../src/config/interfaces/pokemon';
-import {NavigationContext} from '@react-navigation/native';
 import {Pokemon} from '../src/config/interfaces/pokemon';
 
 // Mocks
@@ -74,20 +73,4 @@ describe('CardPokemon', () => {
     );
   });
 
-  /*it('calls navigation.goBack when the back button is pressed', () => {
-    const mockGoBack = jest.fn();
-
-    const {getByText} = render(
-      <NavigationContext.Provider value={{goBack: mockGoBack} as any}>
-        <PokedexContext.Provider value={mockContextValue}>
-          <CardPokemon pokemon={mockPokemon} />
-        </PokedexContext.Provider>
-      </NavigationContext.Provider>,
-    );
-
-    const backButton = getByText('Regresar');
-    fireEvent.press(backButton);
-
-    expect(mockGoBack).toHaveBeenCalled();
-  });*/
 });

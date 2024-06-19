@@ -1,7 +1,6 @@
 import React from 'react';
-import {render, fireEvent, screen} from '@testing-library/react-native';
+import {render} from '@testing-library/react-native';
 import CardListPokemon from '../src/screens/components/CardListPokemon';
-import {NavigationContext} from '@react-navigation/native';
 import {Pokemon} from '../src/config/interfaces/pokemon';
 
 // Mocks
@@ -32,19 +31,4 @@ describe('CardListPokemon', () => {
     expect(getByText(`# ${mockPokemon.id}: ${mockPokemon.name}`)).toBeTruthy();
   });
 
-  /*it('navigates to DetailScreen when the button is pressed', () => {
-    const mockNavigate = jest.fn();
-
-    const {getByText} = render(
-      <NavigationContext.Provider value={{navigate: mockNavigate} as any}>
-        <CardListPokemon pokemon={mockPokemon} />
-      </NavigationContext.Provider>,
-    );
-
-    const viewButton = getByText('Ver');
-    fireEvent.press(viewButton);
-    expect(mockNavigate).toHaveBeenCalledWith('DetailScreen', {
-      pokemonId: mockPokemon.id,
-    });
-  });*/
 });
