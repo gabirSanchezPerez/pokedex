@@ -31,7 +31,7 @@ const PokedexProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   };
   const obtenerPokemonById = async (id: number) => {
     let dataPokemon = await getPokemonById(id)
-    setPokemon(dataPokemon)
+    setPokemon(dataPokemon);
   }
 
   const obtenerCaracteristica = async (url: string) => {

@@ -19,7 +19,7 @@ const CardPokemon = ({ pokemon }: Props) => {
   return (
     <Card >
       <Text style={style.title} variant="headlineMedium">{pokemon.name}</Text>
-      <Image source={{ uri: pokemon.avatar }} style={{ objectFit: 'cover', width: 250, height: 250, alignSelf: "center" }} />
+      <Image source={{ uri: pokemon.avatar }} style={{ objectFit: 'cover', width: 250, height: 250, alignSelf: "center" }} testID="pokemon-avatar" />
 
       <Card.Content>
 

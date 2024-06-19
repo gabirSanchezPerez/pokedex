@@ -1,17 +1,34 @@
-/**
- * @format
- */
-
-import 'react-native';
+import 'react-native-gesture-handler/jestSetup';
 import React from 'react';
-import App from '../App';
+import {render, waitFor} from '@testing-library/react-native';
+import App from '../src/App';
 
-// Note: import explicitly to use the types shipped with jest.
-import {it} from '@jest/globals';
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: jest.fn(),
+    }),
+  };
+});
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+jest.mock('../src/context/PokedexContext', () => ({
+  __esModule: true,
+  PokedexProvider: ({children}: {children: React.ReactNode}) => <>{children}</>,
+}));
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+jest.mock('../src/navigation/StackNavigator', () => ({
+  __esModule: true,
+  default: () => <div data-testid="stack-navigator" />,
+}));
+
+describe('<App />', () => {
+  it('renders correctly', async () => {
+    const {getByTestId} = render(<App />);
+
+    await waitFor(() => {
+      expect(getByTestId('stack-navigator')).toBeTruthy();
+    });
+  });
 });

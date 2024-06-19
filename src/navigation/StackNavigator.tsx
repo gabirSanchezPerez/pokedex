@@ -1,5 +1,5 @@
-import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 import LoadingScreen from '../screens/LoadingScreen';
 import ListScreen from '../screens/pokemon/ListScreen';
 import DetailScreen from '../screens/pokemon/DetailScreen';

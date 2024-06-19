@@ -8,11 +8,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const theme = {
   ...themaDefault,
-  colors: {
-    ...themaDefault.colors,
-    primary: 'tomato',
-    secondary: 'yellow',
-  },
 };
 
 const App = () => {
